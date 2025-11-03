@@ -43,6 +43,8 @@ const CompetitorRatingsChart = lazy(() => import("@/components/competitor-rating
 const CompetitorMetricsAverages = lazy(() => import("@/components/competitor-metrics-averages"));
 const MarketShareTable = lazy(() => import("@/components/market-share-table"));
 const CompetitorAspectTrend = lazy(() => import("@/components/competitor-aspect-trend"));
+const WordCloud = lazy(() => import("@/components/wordcloud")); 
+const FarasReviews = lazy(() => import("@/components/faras-reviews"));
 
 interface MetricItem {
   company: string;
@@ -70,6 +72,12 @@ export default function DashboardPage() {
     suspense: true,
     fallbackData: { years: [2025, 2024, 2023] } as YearsData,
   };
+
+  const { data: farasReviewsResp = { data: [] }, error: farasReviewsError } = useSWR("/api/faras-reviews", fetcher, swrConfig);
+  const farasReviews = Array.isArray(farasReviewsResp?.data) ? farasReviewsResp.data : [];
+
+  const { data: wordcloudResp = { data: [] } } = useSWR("/api/wordcloud", fetcher, swrConfig);
+const wordcloudWords = Array.isArray(wordcloudResp?.data) ? wordcloudResp.data : [];
 
   const { data: yearsData } = useSWR<YearsData>("/api/available-years", fetcher, swrConfig);
   const availableYears = yearsData?.years || [2025, 2024, 2023];
@@ -520,10 +528,12 @@ export default function DashboardPage() {
                 <Tabs defaultValue="overview">
                   <TabsList className="mb-4">
                     <TabsTrigger value="overview">Overview</TabsTrigger>
+                    <TabsTrigger value="Top">Top</TabsTrigger>
                     <TabsTrigger value="scorecard">
-                      Scorecard <span className="ml-1 rounded bg-amber-500 px-1.5 py-0.5 text-xs text-white">NEW</span>
+                      Trend <span className="ml-1 rounded bg-amber-500 px-1.5 py-0.5 text-xs text-white">NEW</span>
                     </TabsTrigger>
                     <TabsTrigger value="aspects">Aspects</TabsTrigger>
+
                   </TabsList>
                   <TabsContent value="overview" className="space-y-4">
                     <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
@@ -621,6 +631,9 @@ export default function DashboardPage() {
                         <SourcesSentiment data={sourcesSentimentData} />
                       </div>
                     </div>
+                    <div className="rounded-lg border bg-card p-4 shadow-sm">
+
+  </div>
                   </TabsContent>
 
                   <TabsContent value="scorecard" className="space-y-4">
@@ -657,6 +670,73 @@ export default function DashboardPage() {
                         </Card>
                       </div>
                     </div>
+                  </TabsContent>
+                  <TabsContent value="Top" className="space-y-4">
+                      <div className="p-2">
+                        <div className="mb-2 flex items-center justify-between">
+                          <h2 className="text-lg font-medium">Word Cloud</h2>
+                          <p className="text-sm text-gray-500">Top words from recent Faras reviews</p>
+                        </div>
+
+                        <Suspense fallback={<LoadingSpinner />}>
+                          <WordCloud words={wordcloudWords} />
+                        </Suspense>
+                      </div>
+                        <div className="flex items-center justify-between">
+    <div className="flex items-center gap-2">
+      <h2 className="text-lg font-medium">Sources (sentiment)</h2>
+      <span className="ml-2 rounded-full bg-emerald-100 text-emerald-800 px-2 py-0.5 text-xs font-medium">
+        10 reviews
+      </span>
+      <div className="rounded-full bg-gray-200 p-1">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none">
+          <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z" />
+          <path d="M12 16v-4" />
+          <path d="M12 8h.01" />
+        </svg>
+      </div>
+    </div>
+    <div className="flex items-center gap-2">
+      <span className="text-sm">No. of Sources</span>
+      <span className="rounded bg-gray-100 px-2 py-1 text-sm">{sourcesVolumeData?.length || 0}</span>
+    </div>
+  </div>
+    {/* New: small reviews preview */}
+    <div className="mt-4 border-t pt-4">
+      <h3 className="text-sm font-medium mb-2">Recent Faras Reviews</h3>
+
+      {farasReviews.length === 0 ? (
+        <p className="text-sm text-gray-500">No reviews available.</p>
+      ) : (
+        <div className="grid grid-cols-1 gap-3">
+          {farasReviews.map((r: any) => (
+            <div key={r.id} className="flex items-start gap-3 rounded-md border bg-white p-3 shadow-sm">
+              <div className="flex-shrink-0">
+                <div className="h-8 w-8 rounded-full bg-emerald-500 flex items-center justify-center text-xs font-semibold text-white">
+                  {String(r.source || "U").charAt(0)}
+                </div>
+              </div>
+              <div className="flex-1">
+                <div className="flex items-center justify-between">
+                  <div className="text-sm font-medium text-gray-800">{r.sourcee ?? "App"}</div>
+                  <span
+                    className={`text-xs font-semibold px-2 py-0.5 rounded-full ${
+                      r.overall_sentiment === "positive" ? "bg-green-100 text-green-800" : r.overall_sentiment === "negative" ? "bg-red-100 text-red-800" : "bg-gray-100 text-gray-800"
+                    }`}
+                  >
+                    {r.overall_sentiment ?? "neutral"}
+                  </span>
+                </div>
+                <p className="mt-1 text-sm text-gray-700 line-clamp-2">{r.text}</p>
+                <div className="mt-2 flex items-center gap-2 text-xs text-gray-400">
+                  <span>{new Date(r.created_at ?? Date.now()).toLocaleDateString()}</span>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
                   </TabsContent>
 
                   <TabsContent value="aspects" className="space-y-4">
