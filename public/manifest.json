@@ -1,22 +1,27 @@
 {
   "name": "FASA Dashboard",
   "short_name": "FASA",
-  "start_url": "/dashboard",
+  "description": "Sentiment Analysis Dashboard",
+  "start_url": "/dashboard?source=pwa",
   "scope": "/",
   "display": "standalone",
+  "display_override": ["standalone"],
   "orientation": "portrait",
   "theme_color": "#10B981",
   "background_color": "#ffffff",
+  "prefer_related_applications": false,
   "icons": [
     {
       "src": "/placeholder-logo.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     },
     {
       "src": "/placeholder-logo.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     }
   ]
 }
