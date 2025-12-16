@@ -20,6 +20,7 @@ import ChurnTrendChart from "@/components/churn-trend-chart";
 import ResponseRateCard from "@/components/response-rate-card";
 import ResponseTrendChart from "@/components/response-trend-chart";
 import AIInsights from "@/components/ai-insights";
+import InstallPWAButton from "@/components/install-pwa-button";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
@@ -464,6 +465,7 @@ const wordcloudWords = Array.isArray(wordcloudResp?.data) ? wordcloudResp.data :
           </div>
 
           <div className="ml-auto flex items-center gap-2 sm:gap-4">
+            <InstallPWAButton />
             <Avatar className="h-7 w-7 sm:h-8 sm:w-8">
               <AvatarImage src="/placeholder.svg?height=32&width=32" alt="User" />
               <AvatarFallback>MR</AvatarFallback>
