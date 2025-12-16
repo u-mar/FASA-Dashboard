@@ -19,6 +19,7 @@ import ChurnRiskCard from "@/components/churn-risk-card";
 import ChurnTrendChart from "@/components/churn-trend-chart";
 import ResponseRateCard from "@/components/response-rate-card";
 import ResponseTrendChart from "@/components/response-trend-chart";
+import AIInsights from "@/components/ai-insights";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
@@ -533,8 +534,15 @@ const wordcloudWords = Array.isArray(wordcloudResp?.data) ? wordcloudResp.data :
                       Trend <span className="ml-1 rounded bg-amber-500 px-1.5 py-0.5 text-xs text-white">NEW</span>
                     </TabsTrigger>
                     <TabsTrigger value="aspects">Aspects</TabsTrigger>
+                    <TabsTrigger value="ai-insights">
+                      AI Insights <span className="ml-1 rounded bg-purple-500 px-1.5 py-0.5 text-xs text-white">AI</span>
+                    </TabsTrigger>
 
                   </TabsList>
+                  <TabsContent value="ai-insights" className="space-y-4">
+                    <AIInsights year={selectedYear} />
+                  </TabsContent>
+
                   <TabsContent value="overview" className="space-y-4">
                     <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
                       <div className="rounded-lg border bg-card p-4 shadow-sm">

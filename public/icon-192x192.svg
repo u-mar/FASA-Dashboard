@@ -1,0 +1,7 @@
+<svg width="192" height="192" viewBox="0 0 192 192" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="192" height="192" rx="32" fill="#10B981"/>
+  <path d="M96 40L40 70L96 100L152 70L96 40Z" fill="white"/>
+  <path d="M40 122L96 152L152 122" stroke="white" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M40 92L96 122L152 92" stroke="white" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="96" y="175" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="white" text-anchor="middle">FASA</text>
+</svg>
