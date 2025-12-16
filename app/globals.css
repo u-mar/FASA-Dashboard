@@ -12,6 +12,27 @@ body {
   }
 }
 
+/* Mobile-friendly responsive styles */
+@media (max-width: 640px) {
+  /* Make charts responsive */
+  canvas {
+    max-height: 250px !important;
+  }
+  
+  /* Better touch targets */
+  button, a {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Scrollable tables */
+  table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;

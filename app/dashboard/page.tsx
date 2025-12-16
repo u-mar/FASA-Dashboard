@@ -204,12 +204,12 @@ const wordcloudWords = Array.isArray(wordcloudResp?.data) ? wordcloudResp.data :
 
   const renderCompetitorContent = () => (
     <Suspense fallback={<LoadingSpinner />}>
-      <div className="p-4">
-        <div className="mb-4 flex items-center justify-between">
+      <div className="p-2 sm:p-4">
+        <div className="mb-3 sm:mb-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
           <div className="flex items-center gap-2">
-            <h1 className="text-xl font-semibold">Competitive Analysis</h1>
+            <h1 className="text-base sm:text-xl font-semibold">Competitive Analysis</h1>
             <div className="rounded-full bg-blue-500 p-1 text-white">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" className="sm:w-4 sm:h-4">
                 <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z" />
                 <path d="M12 16v-4" />
                 <path d="M12 8h.01" />
@@ -219,79 +219,81 @@ const wordcloudWords = Array.isArray(wordcloudResp?.data) ? wordcloudResp.data :
         </div>
 
         <Tabs defaultValue="market">
-          <TabsList className="mb-4">
-            <TabsTrigger value="market">Market Analysis</TabsTrigger>
-            <TabsTrigger value="sentiment">Sentiment Analysis</TabsTrigger>
-            <TabsTrigger value="performance">Performance Metrics</TabsTrigger>
-          </TabsList>
+          <div className="overflow-x-auto -mx-2 sm:mx-0 px-2 sm:px-0">
+            <TabsList className="mb-3 sm:mb-4 w-max sm:w-auto">
+              <TabsTrigger value="market" className="text-xs sm:text-sm px-2 sm:px-4">Market Analysis</TabsTrigger>
+              <TabsTrigger value="sentiment" className="text-xs sm:text-sm px-2 sm:px-4">Sentiment Analysis</TabsTrigger>
+              <TabsTrigger value="performance" className="text-xs sm:text-sm px-2 sm:px-4">Performance Metrics</TabsTrigger>
+            </TabsList>
+          </div>
 
           <TabsContent value="market">
-            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+            <div className="grid grid-cols-1 gap-3 sm:gap-4 md:grid-cols-2">
               <Card className="border shadow-sm">
-                <CardHeader className="pb-2">
-                  <CardTitle className="text-lg font-medium">Market Share</CardTitle>
+                <CardHeader className="pb-2 px-3 sm:px-6 pt-3 sm:pt-6">
+                  <CardTitle className="text-sm sm:text-base md:text-lg font-medium">Market Share</CardTitle>
                 </CardHeader>
-                <CardContent>
+                <CardContent className="px-3 sm:px-6 pb-3 sm:pb-6">
                   <CompetitorMarketShare data={marketShareData} />
                 </CardContent>
               </Card>
 
               <Card className="border shadow-sm">
-                <CardHeader className="pb-2">
-                  <CardTitle className="text-lg font-medium">Average Ratings</CardTitle>
+                <CardHeader className="pb-2 px-3 sm:px-6 pt-3 sm:pt-6">
+                  <CardTitle className="text-sm sm:text-base md:text-lg font-medium">Average Ratings</CardTitle>
                 </CardHeader>
-                <CardContent>
+                <CardContent className="px-3 sm:px-6 pb-3 sm:pb-6">
                   <CompetitorRatingsChart data={marketShareData} />
                 </CardContent>
               </Card>
             </div>
 
-            <Card className="mt-4 border shadow-sm">
-              <CardHeader className="pb-2">
-                <CardTitle className="text-lg font-medium">Market Share Details</CardTitle>
+            <Card className="mt-3 sm:mt-4 border shadow-sm">
+              <CardHeader className="pb-2 px-3 sm:px-6 pt-3 sm:pt-6">
+                <CardTitle className="text-sm sm:text-base md:text-lg font-medium">Market Share Details</CardTitle>
               </CardHeader>
-              <CardContent>
+              <CardContent className="px-3 sm:px-6 pb-3 sm:pb-6 overflow-x-auto">
                 <MarketShareTable data={marketShareData} />
               </CardContent>
             </Card>
 
-            <Card className="mt-4 border shadow-sm">
-              <CardHeader className="pb-2">
-                <CardTitle className="text-lg font-medium">Sentiment Trend Comparison</CardTitle>
+            <Card className="mt-3 sm:mt-4 border shadow-sm">
+              <CardHeader className="pb-2 px-3 sm:px-6 pt-3 sm:pt-6">
+                <CardTitle className="text-sm sm:text-base md:text-lg font-medium">Sentiment Trend Comparison</CardTitle>
               </CardHeader>
-              <CardContent>
+              <CardContent className="px-3 sm:px-6 pb-3 sm:pb-6">
                 <CompetitorTrendComparison data={sentimentTrendComparisonData} />
               </CardContent>
             </Card>
           </TabsContent>
 
           <TabsContent value="sentiment">
-            <div className="space-y-4">
+            <div className="space-y-3 sm:space-y-4">
               <Card className="border shadow-sm">
-                <CardHeader className="pb-2">
-                  <CardTitle className="text-lg font-medium">Sentiment Comparison by Competitor</CardTitle>
+                <CardHeader className="pb-2 px-3 sm:px-6 pt-3 sm:pt-6">
+                  <CardTitle className="text-sm sm:text-base md:text-lg font-medium">Sentiment Comparison by Competitor</CardTitle>
                 </CardHeader>
-                <CardContent>
+                <CardContent className="px-3 sm:px-6 pb-3 sm:pb-6">
                   <CompetitorSentimentComparison data={competitorSentimentData} />
                 </CardContent>
               </Card>
 
               <Card className="border shadow-sm">
-                <CardHeader className="pb-2">
-                  <CardTitle className="text-lg font-medium">Aspect Sentiment Comparison</CardTitle>
-                  <p className="text-sm text-muted-foreground">Select companies to compare or click "All" to view all competitors</p>
+                <CardHeader className="pb-2 px-3 sm:px-6 pt-3 sm:pt-6">
+                  <CardTitle className="text-sm sm:text-base md:text-lg font-medium">Aspect Sentiment Comparison</CardTitle>
+                  <p className="text-xs sm:text-sm text-muted-foreground">Select companies to compare or click "All" to view all competitors</p>
                 </CardHeader>
-                <CardContent>
+                <CardContent className="px-3 sm:px-6 pb-3 sm:pb-6">
                   <CompetitorAspectComparison data={competitorAspectData} />
                 </CardContent>
               </Card>
 
               <Card className="border shadow-sm">
-                <CardHeader className="pb-2">
-                  <CardTitle className="text-lg font-medium">Aspect Sentiment Trend</CardTitle>
-                  <p className="text-sm text-muted-foreground">Select an aspect and companies to visualize sentiment trends over time</p>
+                <CardHeader className="pb-2 px-3 sm:px-6 pt-3 sm:pt-6">
+                  <CardTitle className="text-sm sm:text-base md:text-lg font-medium">Aspect Sentiment Trend</CardTitle>
+                  <p className="text-xs sm:text-sm text-muted-foreground">Select an aspect and companies to visualize sentiment trends over time</p>
                 </CardHeader>
-                <CardContent>
+                <CardContent className="px-3 sm:px-6 pb-3 sm:pb-6">
                   <CompetitorAspectTrend data={competitorTrendData} />
                 </CardContent>
               </Card>
@@ -447,32 +449,32 @@ const wordcloudWords = Array.isArray(wordcloudResp?.data) ? wordcloudResp.data :
   return (
     <div className="flex h-screen flex-col">
       <header className="border-b bg-white">
-        <div className="flex h-14 items-center px-4">
-          <div className="flex items-center gap-4">
-            <div className="flex items-center gap-2">
-              <div className="h-6 w-6">
+        <div className="flex h-12 sm:h-14 items-center px-3 sm:px-4">
+          <div className="flex items-center gap-2 sm:gap-4">
+            <div className="flex items-center gap-1.5 sm:gap-2">
+              <div className="h-5 w-5 sm:h-6 sm:w-6">
                 <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M12 2L2 7L12 12L22 7L12 2Z" fill="#10B981" />
                   <path d="M2 17L12 22L22 17" stroke="#10B981" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                   <path d="M2 12L12 17L22 12" stroke="#10B981" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </div>
-              <span className="font-semibold">Faras</span>
+              <span className="font-semibold text-sm sm:text-base">Faras</span>
             </div>
           </div>
 
-          <div className="ml-auto flex items-center gap-4">
-            <Avatar className="h-8 w-8">
+          <div className="ml-auto flex items-center gap-2 sm:gap-4">
+            <Avatar className="h-7 w-7 sm:h-8 sm:w-8">
               <AvatarImage src="/placeholder.svg?height=32&width=32" alt="User" />
               <AvatarFallback>MR</AvatarFallback>
             </Avatar>
 
-            <div className="flex items-center gap-2">
-              <span className="text-sm">Omar</span>
+            <div className="flex items-center gap-1.5 sm:gap-2">
+              <span className="text-xs sm:text-sm hidden sm:inline">Omar</span>
               <button
                 type="button"
                 onClick={handleLogout}
-                className="text-sm text-gray-600 hover:text-emerald-600 px-2 py-1 rounded-md hover:bg-gray-50"
+                className="text-xs sm:text-sm text-gray-600 hover:text-emerald-600 px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-md hover:bg-gray-50"
                 aria-label="Logout"
               >
                 Logout
@@ -482,14 +484,14 @@ const wordcloudWords = Array.isArray(wordcloudResp?.data) ? wordcloudResp.data :
         </div>
       </header>
 
-      <div className="flex flex-1 overflow-hidden">
-        <aside className="w-32 border-r bg-gray-50">
+      <div className="flex flex-1 overflow-hidden flex-col md:flex-row">
+        <aside className="w-full md:w-32 border-b md:border-r md:border-b-0 bg-gray-50">
           <div className="p-2">
-            <h2 className="mb-2 text-xs font-semibold uppercase text-gray-500">Company</h2>
-            <div className="space-y-1">
+            <h2 className="mb-2 text-xs font-semibold uppercase text-gray-500 hidden md:block">Company</h2>
+            <div className="flex md:flex-col md:space-y-1 space-x-1 md:space-x-0">
               <Button
                 variant={activeTab === "faras" ? "secondary" : "ghost"}
-                className="w-full justify-start text-xs px-1.5 py-1"
+                className="flex-1 md:w-full justify-start text-xs px-1.5 py-1"
                 size="sm"
                 onClick={() => setActiveTab("faras")}
               >
@@ -498,7 +500,7 @@ const wordcloudWords = Array.isArray(wordcloudResp?.data) ? wordcloudResp.data :
               </Button>
               <Button
                 variant={activeTab === "competitors" ? "secondary" : "ghost"}
-                className="w-full justify-start text-xs px-1.5 py-1"
+                className="flex-1 md:w-full justify-start text-xs px-1.5 py-1"
                 size="sm"
                 onClick={() => setActiveTab("competitors")}
               >
@@ -512,12 +514,12 @@ const wordcloudWords = Array.isArray(wordcloudResp?.data) ? wordcloudResp.data :
         <main className="flex-1 overflow-auto">
           <Suspense fallback={<LoadingSpinner />}>
             {activeTab === "faras" ? (
-              <div className="p-4">
-                <div className="mb-4 flex items-center justify-between">
+              <div className="p-2 sm:p-4">
+                <div className="mb-3 sm:mb-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
                   <div className="flex items-center gap-2">
-                    <h1 className="text-xl font-semibold">Faras Sentiment Analysis</h1>
+                    <h1 className="text-base sm:text-xl font-semibold">Faras Sentiment Analysis</h1>
                     <div className="rounded-full bg-blue-500 p-1 text-white">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" className="sm:w-4 sm:h-4">
                         <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z" />
                         <path d="M12 16v-4" />
                         <path d="M12 8h.01" />
@@ -527,26 +529,27 @@ const wordcloudWords = Array.isArray(wordcloudResp?.data) ? wordcloudResp.data :
                 </div>
 
                 <Tabs defaultValue="overview">
-                  <TabsList className="mb-4">
-                    <TabsTrigger value="overview">Overview</TabsTrigger>
-                    <TabsTrigger value="Top">Top</TabsTrigger>
-                    <TabsTrigger value="scorecard">
-                      Trend <span className="ml-1 rounded bg-amber-500 px-1.5 py-0.5 text-xs text-white">NEW</span>
-                    </TabsTrigger>
-                    <TabsTrigger value="aspects">Aspects</TabsTrigger>
-                    <TabsTrigger value="ai-insights">
-                      AI Insights <span className="ml-1 rounded bg-purple-500 px-1.5 py-0.5 text-xs text-white">AI</span>
-                    </TabsTrigger>
-
-                  </TabsList>
+                  <div className="overflow-x-auto -mx-2 sm:mx-0 px-2 sm:px-0">
+                    <TabsList className="mb-3 sm:mb-4 w-max sm:w-auto">
+                      <TabsTrigger value="overview" className="text-xs sm:text-sm px-2 sm:px-4">Overview</TabsTrigger>
+                      <TabsTrigger value="Top" className="text-xs sm:text-sm px-2 sm:px-4">Top</TabsTrigger>
+                      <TabsTrigger value="scorecard" className="text-xs sm:text-sm px-2 sm:px-4">
+                        Trend <span className="ml-1 rounded bg-amber-500 px-1 py-0.5 text-[10px] text-white">NEW</span>
+                      </TabsTrigger>
+                      <TabsTrigger value="aspects" className="text-xs sm:text-sm px-2 sm:px-4">Aspects</TabsTrigger>
+                      <TabsTrigger value="ai-insights" className="text-xs sm:text-sm px-2 sm:px-4">
+                        AI Insights <span className="ml-1 rounded bg-purple-500 px-1 py-0.5 text-[10px] text-white">AI</span>
+                      </TabsTrigger>
+                    </TabsList>
+                  </div>
                   <TabsContent value="ai-insights" className="space-y-4">
                     <AIInsights year={selectedYear} />
                   </TabsContent>
 
-                  <TabsContent value="overview" className="space-y-4">
-                    <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-                      <div className="rounded-lg border bg-card p-4 shadow-sm">
-                        <div className="mb-4">
+                  <TabsContent value="overview" className="space-y-3 sm:space-y-4">
+                    <div className="grid grid-cols-1 gap-3 sm:gap-4 lg:grid-cols-2">
+                      <div className="rounded-lg border bg-card p-3 sm:p-4 shadow-sm">
+                        <div className="mb-3 sm:mb-4">
                           <div className="flex items-center gap-2 mb-2">
                             <h2 className="text-lg font-medium">Sentiment Trend</h2>
                             <div className="rounded-full bg-gray-200 p-1">
