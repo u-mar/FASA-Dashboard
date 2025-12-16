@@ -10,13 +10,14 @@ export const metadata = {
   themeColor: '#10B981',
   appleWebApp: {
     capable: true,
-    statusBarStyle: 'default',
+    statusBarStyle: 'black-translucent',
     title: 'FASA Dashboard',
   },
   viewport: {
     width: 'device-width',
     initialScale: 1,
     maximumScale: 1,
+    userScalable: false,
   },
 }
 
