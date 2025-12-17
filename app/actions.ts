@@ -684,7 +684,7 @@ export async function getCompetitorData(): Promise<CompetitorData> {
       GROUP BY company
       ORDER BY churn_rate DESC;
     `
-    churnRateData = await sql.query(query)
+    churnRateData = await sql.query(query) as any
     console.log("Churn rate data:", churnRateData)
   } catch (error) {
     console.error("Error fetching churn rate data:", error)
@@ -711,7 +711,7 @@ export async function getCompetitorData(): Promise<CompetitorData> {
       GROUP BY company
       ORDER BY response_rate DESC;
     `
-    responseRateData = await sql.query(query)
+    responseRateData = await sql.query(query) as any
     console.log("Response rate data:", responseRateData)
   } catch (error) {
     console.error("Error fetching response rate data:", error)
@@ -742,7 +742,7 @@ export async function getCompetitorData(): Promise<CompetitorData> {
       GROUP BY company, EXTRACT(YEAR FROM date)
       ORDER BY company, year;
     `
-    churnTrendRawData = await sql.query(query)
+    churnTrendRawData = await sql.query(query) as any
     console.log("Churn trend data:", churnTrendRawData)
   } catch (error) {
     console.error("Error fetching churn trend data:", error)
@@ -770,7 +770,7 @@ GROUP BY company, EXTRACT(YEAR FROM date)
 ORDER BY company, year;
 
     `
-    responseTrendRawData = await sql.query(query)
+    responseTrendRawData = await sql.query(query) as any
     console.log("Response trend data:", responseTrendRawData)
   } catch (error) {
     console.error("Error fetching response trend data:", error)
