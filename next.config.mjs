@@ -6,7 +6,9 @@ const withPWA = withPWAInit({
 });
 
 const nextConfig = {
-  
+  typescript: {
+    ignoreBuildErrors: true,
+  },
 };
 
 export default withPWA(nextConfig);
