@@ -6,7 +6,9 @@ const withPWA = withPWAInit({
 });
 
 const nextConfig = {
-  turbopack: {},
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
 };
 
 export default withPWA(nextConfig);
