@@ -6,9 +6,7 @@ const withPWA = withPWAInit({
 });
 
 const nextConfig = {
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
+  
 };
 
 export default withPWA(nextConfig);
