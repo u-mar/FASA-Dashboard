@@ -21,7 +21,7 @@ export type AspectMetricsData = {
 }
 
 export type SourcesVolumeData = {
-  sourcee: string
+  source: string
   volume: number
 }
 
