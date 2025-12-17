@@ -191,7 +191,7 @@ export async function executeQuery(query: string, params: any[] = []) {
     // Convert conventional query to tagged template literal
     // This is a workaround since we can't directly use tagged templates with dynamic strings
     const result = await sql.query(query, params)
-    return result.rows
+    return result as any[]
   } catch (error) {
     console.error("Database query error:", error)
     throw new Error("Failed to execute database query")
